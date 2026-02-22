@@ -4,7 +4,7 @@
 
 This repository contains the source code for a personal portfolio website for Minhajul Abadin Pius. It is a responsive, single-page application designed to showcase professional skills, services, and personal projects. The site is built with HTML, CSS, and interactive JavaScript features.
 
-You can view the live website at: **[https://aj-0-pius.github.io/](https://aj-0-pius.github.io/)**
+You can view the live website at: **[https://aj-0-pius.github.io/](https://aj-0-pius.github.io/aj_0_pius.github.io/)**
 
 ## Features
 

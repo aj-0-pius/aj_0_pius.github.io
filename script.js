@@ -35,7 +35,7 @@ $(document).ready(function(){
 
     // typing text animation script
     var typed = new Typed(".typing", {
-        strings: ["Developer", "Designer", "Freelancer", "CyberSecurityAgent"],
+        strings: ["Network Security", "Developer", "Network Administrator", "Cyber Security"],
         typeSpeed: 100,
         backSpeed: 60,
         loop: true
@@ -72,3 +72,4 @@ $(document).ready(function(){
     });
 
 });
+

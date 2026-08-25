@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhajul Abadin Pius | Cyber Portfolio</title>
+    <meta property="og:title" content="Minhajul Abadin Pius | Cyber Portfolio">
+    <meta property="og:description" content="Penetration Tester & CTF Player Portfolio. Accessing secure connection...">
+    <meta property="og:image" content="https://yourdomain.com/preview-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        mono: ['"Fira Code"', 'monospace'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        terminal: {
+                            black: '#0a0a0a',
+                            dark: '#121212',
+                            green: '#10b981',
+                            cyan: '#22d3ee',
+                            border: '#1f2937',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="text-gray-300 font-sans antialiased">
+    <!-- FLAG{S0urce_C0de_Inspected_Success} -->
+
+    <div id="nav-brand-fixed" class="nav-brand-fixed terminal-brand">
+        <a href="#home" class="font-mono text-terminal-green font-bold text-lg tracking-tighter terminal-prompt">
+            <span class="prompt-prefix">root@</span><span class="text-terminal-green">aj_0_pius</span><span class="prompt-suffix">:~$</span>
+        </a>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full top-0 z-50 nav-glass">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="font-mono text-terminal-green font-bold text-lg tracking-tighter nav-brand-hidden terminal-prompt">
+                <span class="prompt-prefix">root@</span><span class="text-terminal-green">aj_0_pius</span><span class="prompt-suffix">:~$</span>
+            </a>
+
+            <!-- Desktop Nav -->
+            <ul class="hidden md:flex space-x-8 font-mono text-sm uppercase tracking-widest">
+                <li><a href="#home" class="hover:text-terminal-green transition-colors">01. Home</a></li>
+                <li><a href="#whoami" class="hover:text-terminal-green transition-colors">02. whoami</a></li>
+                <li><a href="#arsenal" class="hover:text-terminal-green transition-colors">03. Arsenal</a></li>
+                <li><a href="#writeups" class="hover:text-terminal-green transition-colors">04. Writeups</a></li>
+                <li><a href="#contact" class="hover:text-terminal-green transition-colors">05. Contact</a></li>
+            </ul>
+
+            <!-- Mobile Menu Btn -->
+            <button id="menu-btn" class="md:hidden text-terminal-green text-2xl">
+                <i class="fa-solid fa-terminal"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-terminal-dark border-b border-terminal-green/20 font-mono p-6">
+            <ul class="space-y-4 text-sm">
+                <li><a href="#home" class="block hover:text-terminal-green">./home.sh</a></li>
+                <li><a href="#whoami" class="block hover:text-terminal-green">./whoami.sh</a></li>
+                <li><a href="#arsenal" class="block hover:text-terminal-green">./arsenal.bin</a></li>
+                <li><a href="#writeups" class="block hover:text-terminal-green">./view_writeups</a></li>
+                <li><a href="#contact" class="block hover:text-terminal-green">./establish_comm</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 px-6">
+        <div class="max-w-6xl w-full grid lg:grid-cols-[1.2fr_0.8fr] gap-10 items-center">
+            <div>
+                <h1 class="text-4xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                    <div class="flex flex-col items-start gap-2 sm:gap-3">
+                        <span class="typewriter-static whitespace-nowrap">Hello, I am</span>
+                        <span id="typewriter" class="inline-flex items-center whitespace-nowrap"></span>
+                    </div>
+                </h1>
+                <p class="font-mono text-terminal-cyan text-lg md:text-2xl mb-10 opacity-80">
+                    > Penetration Tester | CTF Player | Network Engineer
+                </p>
+                <div class="flex flex-wrap gap-6">
+                    <a href="#writeups" class="px-8 py-4 bg-terminal-green text-black font-bold font-mono rounded hover:shadow-[0_0_20px_rgba(16,185,129,0.6)] transition-all">
+                        View Arsenal
+                    </a>
+                    <a href="#contact" class="px-8 py-4 border border-terminal-green text-terminal-green font-bold font-mono rounded hover:bg-terminal-green/10 transition-all">
+                        Establish Connection
+                    </a>
+                </div>
+            </div>
+
+            <div class="cli-panel reveal">
+                <div class="cli-header">
+                    <div class="cli-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <span>terminal://secure-shell</span>
+                </div>
+                <div id="cli-output" class="cli-output" aria-live="polite"></div>
+                <div class="cli-input-row">
+                    <span class="cli-prompt">root@aj_0_pius:~$</span>
+                    <input id="cli-input" class="cli-input" type="text" aria-label="Terminal command input" spellcheck="false" />
+                </div>
+                <div class="cli-help-row px-4 pb-3 font-mono text-xs text-terminal-cyan">
+                    <button type="button" class="cli-command-btn" data-command="ls">ls</button>
+                    <button type="button" class="cli-command-btn" data-command="whoami">whoami</button>
+                    <button type="button" class="cli-command-btn" data-command="cat about.txt">cat about.txt</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Whoami Section -->
+    <section id="whoami" class="py-24 px-6 bg-terminal-dark/50">
+        <div class="container mx-auto max-w-5xl">
+            <h2 class="font-mono text-2xl text-terminal-green mb-12 flex items-center">
+                <span class="mr-2 text-gray-600">01.</span> whoami
+            </h2>
+            
+            <div class="terminal-window rounded-lg overflow-hidden bg-terminal-black">
+                <!-- Terminal Header -->
+                <div class="bg-[#2d2d2d] px-4 py-2 flex items-center justify-between">
+                    <div class="flex space-x-2">
+                        <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                        <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                        <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                    </div>
+                    <div class="text-xs font-mono text-gray-400">bash — 80x24</div>
+                    <div></div>
+                </div>
+                <!-- Terminal Content -->
+                <div class="p-6 md:p-10 font-mono leading-relaxed">
+                    <p class="text-terminal-green mb-4">$ cat biography.txt</p>
+                    <p class="mb-6 text-gray-300">
+                        I am a <span class="text-terminal-cyan">Cyber Security specialist</span>, <span class="text-terminal-cyan">Forensic Investigator</span>, and professional <span class="text-terminal-cyan">Network Administrator</span>. Alongside my computer science studies, I actively secure critical infrastructure and recently took home a top-tier award (2nd place) at the Bangladesh Cyber Security Olympiad 2026. With a strong background in <span class="text-terminal-cyan">Network Architecture</span> and <span class="text-terminal-cyan">Offensive Security</span>, I spend my time auditing web applications, analyzing digital forensics, and competing in global CTF events.
+                    </p>
+                    <p class="mb-8 text-gray-300">
+                        My philosophy: Security is not a product, but a process. I focus on the "why" behind exploits, not just the "how."
+                    </p>
+                    <a href="assets/resume.pdf" class="inline-block px-6 py-2 border border-gray-600 rounded text-xs hover:border-terminal-cyan hover:text-terminal-cyan transition-all resume-trigger" aria-label="Open resume viewer">
+                        <i class="fa-solid fa-download mr-2"></i> download_resume.pdf
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Arsenal (Skills) Section -->
+    <section id="arsenal" class="py-24 px-6">
+        <div class="container mx-auto max-w-5xl">
+            <h2 class="font-mono text-2xl text-terminal-green mb-12 flex items-center">
+                <span class="mr-2 text-gray-600">02.</span> Arsenal & Certifications
+            </h2>
+
+            <div class="platform-strip reveal">
+                <div class="platform-badge">
+                    <img src="https://tryhackme-badges.s3.amazonaws.com/aj_0_pius.svg" alt="TryHackMe profile badge" />
+                </div>
+                <div class="platform-badge">
+                    <img src="https://img.shields.io/badge/HackTheBox-Active-10b981?style=for-the-badge&logo=hackthebox&logoColor=white" alt="HackTheBox profile" />
+                </div>
+                <div class="platform-badge platform-cert badge-ccna reveal">
+                    <div class="text-center">
+                        <div class="text-terminal-green font-mono text-xs uppercase tracking-widest mb-2">Certification</div>
+                        <div class="text-white font-mono text-lg font-bold">CCNA</div>
+                        <div class="text-terminal-cyan text-xs mt-2">Cisco Certified Network Associate</div>
+                    </div>
+                </div>
+                <button type="button" class="platform-badge platform-cert badge-cns reveal certificate-trigger" aria-label="Open Cisco Network Security certificate">
+                    <div class="text-center">
+                        <div class="text-terminal-green font-mono text-xs uppercase tracking-widest mb-2">Certification</div>
+                        <div class="text-white font-mono text-lg font-bold">CNS</div>
+                        <div class="text-terminal-cyan text-xs mt-2">Cisco Network Security</div>
+                    </div>
+                </button>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 mt-10">
+                <!-- Group 1 -->
+                <div class="p-6 border border-terminal-border rounded-lg bg-terminal-dark/30 md:col-span-2 min-h-[220px]">
+                    <h3 class="font-mono text-white mb-6 flex items-center">
+                        <i class="fa-solid fa-shield-halved mr-3 text-terminal-green"></i> Offensive
+                    </h3>
+                    <div class="flex flex-wrap gap-2 content-start">
+                        <span class="bg-slate-900 text-terminal-cyan px-3 py-1.5 text-xs font-mono rounded border border-slate-800">Metasploit</span>
+                        <span class="bg-slate-900 text-terminal-cyan px-3 py-1.5 text-xs font-mono rounded border border-slate-800">John the Ripper</span>
+                        <span class="bg-slate-900 text-terminal-cyan px-3 py-1.5 text-xs font-mono rounded border border-slate-800">Volatility</span>
+                        <span class="bg-slate-900 text-terminal-cyan px-3 py-1.5 text-xs font-mono rounded border border-slate-800">Autopsy</span>
+                        <span class="bg-slate-900 text-terminal-cyan px-3 py-1.5 text-xs font-mono rounded border border-slate-800">Wireshark</span>
+                        <span class="bg-slate-900 text-terminal-cyan px-3 py-1.5 text-xs font-mono rounded border border-slate-800">Burp Suite</span>
+                        <span class="bg-slate-900 text-terminal-cyan px-3 py-1.5 text-xs font-mono rounded border border-slate-800">Nmap</span>
+                        <span class="bg-slate-900 text-terminal-cyan px-3 py-1.5 text-xs font-mono rounded border border-slate-800">SQLMap</span>
+                        <span class="bg-slate-900 text-terminal-cyan px-3 py-1.5 text-xs font-mono rounded border border-slate-800">Hydra</span>
+                        <span class="bg-slate-900 text-terminal-cyan px-3 py-1.5 text-xs font-mono rounded border border-slate-800">Linux</span>
+                    </div>
+                </div>
+
+                <div class="mt-10 grid md:grid-cols-2 gap-6 col-span-full">
+                    <div class="skill-card reveal">
+                        <div class="skill-header"><span>Web Exploitation</span><span class="skill-percent">75%</span></div>
+                        <div class="skill-meter"><div class="skill-fill" data-width="75"></div></div>
+                    </div>
+                    <div class="skill-card reveal">
+                        <div class="skill-header"><span>Network Defense</span><span class="skill-percent">80%</span></div>
+                        <div class="skill-meter"><div class="skill-fill" data-width="80"></div></div>
+                    </div>
+                    <div class="skill-card reveal">
+                        <div class="skill-header"><span>Python Automation</span><span class="skill-percent">70%</span></div>
+                        <div class="skill-meter"><div class="skill-fill" data-width="70"></div></div>
+                    </div>
+                    <div class="skill-card reveal">
+                        <div class="skill-header"><span>Threat Hunting</span><span class="skill-percent">76%</span></div>
+                        <div class="skill-meter"><div class="skill-fill" data-width="76"></div></div>
+                    </div>
+                    <div class="skill-card reveal">
+                        <div class="skill-header"><span>Forensic</span><span class="skill-percent">85%</span></div>
+                        <div class="skill-meter"><div class="skill-fill" data-width="85"></div></div>
+                    </div>
+                    <div class="skill-card reveal">
+                        <div class="skill-header"><span>Binary Exploitation</span><span class="skill-percent">63%</span></div>
+                        <div class="skill-meter"><div class="skill-fill" data-width="63"></div></div>
+                    </div>
+                    <div class="skill-card reveal">
+                        <div class="skill-header"><span>Network Security</span><span class="skill-percent">90%</span></div>
+                        <div class="skill-meter"><div class="skill-fill" data-width="90"></div></div>
+                    </div>
+                </div>
+
+                <!-- Group 2 -->
+                <div class="p-6 border border-terminal-border rounded-lg bg-terminal-dark/30">
+                    <h3 class="font-mono text-white mb-6 flex items-center">
+                        <i class="fa-solid fa-code mr-3 text-terminal-green"></i> Scripting
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-slate-900 text-terminal-cyan px-3 py-1 text-xs font-mono rounded border border-slate-800">Python</span>
+                        <span class="bg-slate-900 text-terminal-cyan px-3 py-1 text-xs font-mono rounded border border-slate-800">Bash</span>
+                        <span class="bg-slate-900 text-terminal-cyan px-3 py-1 text-xs font-mono rounded border border-slate-800">Go</span>
+                        <span class="bg-slate-900 text-terminal-cyan px-3 py-1 text-xs font-mono rounded border border-slate-800">Shell</span>
+                    </div>
+                </div>
+
+                <!-- Group 3 -->
+                <div class="p-6 border border-terminal-border rounded-lg bg-terminal-dark/30">
+                    <h3 class="font-mono text-white mb-6 flex items-center">
+                        <i class="fa-solid fa-network-wired mr-3 text-terminal-green"></i> Platforms
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-slate-900 text-terminal-cyan px-3 py-1 text-xs font-mono rounded border border-slate-800">TryHackMe</span>
+                        <span class="bg-slate-900 text-terminal-cyan px-3 py-1 text-xs font-mono rounded border border-slate-800">HackTheBox</span>
+                        <span class="bg-slate-900 text-terminal-cyan px-3 py-1 text-xs font-mono rounded border border-slate-800">Cisco iOS</span>
+                        <span class="bg-slate-900 text-terminal-cyan px-3 py-1 text-xs font-mono rounded border border-slate-800">HackerOne</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Writeups Section -->
+    <section id="writeups" class="py-24 px-6 bg-terminal-dark/50">
+        <div class="container mx-auto max-w-5xl">
+            <h2 class="font-mono text-2xl text-terminal-green mb-12 flex items-center">
+                <span class="mr-2 text-gray-600">03.</span> CTF Writeups & Tools
+            </h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="group border border-terminal-border bg-terminal-black p-6 rounded-lg neon-glow transition-all">
+                    <div class="flex justify-between items-start mb-6">
+                        <i class="fa-regular fa-folder-open text-terminal-green text-3xl"></i>
+                        <div class="flex space-x-4 text-gray-500">
+                            <a href="https://github.com/aj-0-pius/Institute-face-varification-" target="_blank" rel="noopener noreferrer" class="hover:text-terminal-cyan"><i class="fa-brands fa-github"></i></a>
+                            <a href="https://github.com/aj-0-pius/Institute-face-varification-" target="_blank" rel="noopener noreferrer" class="hover:text-terminal-cyan"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="font-mono text-white font-bold text-lg mb-3 group-hover:text-terminal-green transition-colors">Project Vanguard</h3>
+                    <p class="text-sm text-gray-400 mb-6">An AI-powered border intrusion detection system designed to detect unauthorized movement and strengthen perimeter security.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-[10px] font-mono text-terminal-cyan uppercase">[AI]</span>
+                        <span class="text-[10px] font-mono text-terminal-cyan uppercase">[Security]</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="group border border-terminal-border bg-terminal-black p-6 rounded-lg neon-glow transition-all">
+                    <div class="flex justify-between items-start mb-6">
+                        <i class="fa-regular fa-folder-open text-terminal-green text-3xl"></i>
+                        <div class="flex space-x-4 text-gray-500">
+                            <a href="#" class="hover:text-terminal-cyan"><i class="fa-brands fa-github"></i></a>
+                            <a href="#" class="hover:text-terminal-cyan"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="font-mono text-white font-bold text-lg mb-3 group-hover:text-terminal-green transition-colors">RPI-Campus</h3>
+                    <p class="text-sm text-gray-400 mb-6">Developed the backend integration and authentication flow for a campus resource sharing mobile application.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-[10px] font-mono text-terminal-cyan uppercase">[Mobile Application]</span>
+                        <span class="text-[10px] font-mono text-terminal-cyan uppercase">[Secure]</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="group border border-terminal-border bg-terminal-black p-6 rounded-lg neon-glow transition-all">
+                    <div class="flex justify-between items-start mb-6">
+                        <i class="fa-regular fa-folder-open text-terminal-green text-3xl"></i>
+                        <div class="flex space-x-4 text-gray-500">
+                            <a href="#" class="hover:text-terminal-cyan"><i class="fa-brands fa-github"></i></a>
+                            <a href="#" class="hover:text-terminal-cyan"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="font-mono text-white font-bold text-lg mb-3 group-hover:text-terminal-green transition-colors">Hardware Drone Tracker</h3>
+                    <p class="text-sm text-gray-400 mb-6">Built a hardware tracking device designed specifically to monitor and track drones in real time.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-[10px] font-mono text-terminal-cyan uppercase">[IoT]</span>
+                        <span class="text-[10px] font-mono text-terminal-cyan uppercase">[Tracking]</span>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="group border border-terminal-border bg-terminal-black p-6 rounded-lg neon-glow transition-all">
+                    <div class="flex justify-between items-start mb-6">
+                        <i class="fa-regular fa-folder-open text-terminal-green text-3xl"></i>
+                        <div class="flex space-x-4 text-gray-500">
+                            <a href="https://github.com/aj-0-pius/RPI-Secure-Network-Campus-Architecture" target="_blank" rel="noopener noreferrer" class="hover:text-terminal-cyan"><i class="fa-brands fa-github"></i></a>
+                            <a href="https://github.com/aj-0-pius/RPI-Secure-Network-Campus-Architecture" target="_blank" rel="noopener noreferrer" class="hover:text-terminal-cyan"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="font-mono text-white font-bold text-lg mb-3 group-hover:text-terminal-green transition-colors">RPI Secure Network Campus Architecture</h3>
+                    <p class="text-sm text-gray-400 mb-6">A highly secure, multi-departmental campus network infrastructure designed for Rajshahi Polytechnic Institute using Cisco Packet Tracer.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-[10px] font-mono text-terminal-cyan uppercase">[Network]</span>
+                        <span class="text-[10px] font-mono text-terminal-cyan uppercase">[Design]</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6">
+        <div class="container mx-auto max-w-5xl">
+            <div class="grid md:grid-cols-2 gap-16">
+                <div class="reveal">
+                    <h2 class="font-mono text-2xl text-terminal-green mb-8 flex items-center">
+                        <span class="mr-2 text-gray-600">04.</span> Establish Connection
+                    </h2>
+                    <p class="text-gray-300 mb-10 leading-relaxed">
+                        My inbox is always open. Whether you have a question about pentesting or just want to discuss the latest zero-day, feel free to reach out.
+                    </p>
+                    
+                    <div class="space-y-4 font-mono text-sm">
+                        <a href="mailto:minhajulabadinpius@gmail.com" target="_blank" rel="noopener noreferrer" class="flex items-center text-gray-300 hover:text-terminal-green transition-all" aria-label="Email placeholder">
+                            <i class="fa-solid fa-envelope mr-4 text-terminal-green"></i> mailto:minhajulabadinpius@gmail.com
+                        </a>
+                        <a href="https://www.linkedin.com/in/minhajul-abadin-pius" target="_blank" rel="noopener noreferrer" class="flex items-center text-gray-300 hover:text-terminal-green transition-all" aria-label="LinkedIn placeholder">
+                            <i class="fa-brands fa-linkedin mr-4 text-terminal-green"></i> in/minhajul-abadin-pius
+                        </a>
+                        <a href="https://github.com/aj-0-pius" target="_blank" rel="noopener noreferrer" class="flex items-center text-gray-300 hover:text-terminal-green transition-all" aria-label="GitHub profile">
+                            <i class="fa-brands fa-github mr-4 text-terminal-green"></i> github.com/aj-0-pius
+                        </a>
+                        <a href="https://tryhackme.com/p/aj0pius" target="_blank" rel="noopener noreferrer" class="flex items-center text-gray-300 hover:text-terminal-green transition-all" aria-label="TryHackMe placeholder">
+                            <i class="fa-solid fa-bug mr-4 text-terminal-green"></i> TryHackMe: aj0pius
+                        </a>
+                    </div>
+
+                    <!-- Fake PGP Key -->
+                    <div class="mt-10">
+                        <button id="pgp-btn" class="text-xs font-mono text-terminal-cyan border border-terminal-cyan/30 px-4 py-2 rounded hover:bg-terminal-cyan/10 transition-all">
+                            <i class="fa-solid fa-key mr-2"></i> VIEW_PGP_PUBLIC_KEY
+                        </button>
+                        <div id="pgp-key" class="hidden mt-4 p-4 bg-black border border-terminal-border rounded text-[10px] font-mono text-gray-500 overflow-x-auto">
+                            -----BEGIN PGP PUBLIC KEY BLOCK-----<br>
+                            Version: OpenPGP.js v4.10.10<br>
+                            Comment: https://openpgpjs.org<br><br>
+                            xjMEYS5lAxYJKwYBBAHaRw8BAQdA9...<br>
+                            [HIDDEN_ENCRYPTED_STRING]<br>
+                            -----END PGP PUBLIC KEY BLOCK-----
+                        </div>
+                    </div>
+                </div>
+
+                <form id="contact-form" class="space-y-4 font-mono reveal" action="https://formspree.io/f/xwlegred" method="POST">
+                    <div>
+                        <input type="text" name="name" placeholder="Name" required class="w-full bg-terminal-dark border border-terminal-border rounded px-4 py-3 focus:outline-none focus:border-terminal-green text-terminal-green text-sm">
+                    </div>
+                    <div>
+                        <input type="email" name="email" placeholder="Email" required class="w-full bg-terminal-dark border border-terminal-border rounded px-4 py-3 focus:outline-none focus:border-terminal-green text-terminal-green text-sm">
+                    </div>
+                    <div>
+                        <textarea name="message" rows="5" placeholder="Your Message..." required class="w-full bg-terminal-dark border border-terminal-border rounded px-4 py-3 focus:outline-none focus:border-terminal-green text-terminal-green text-sm"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-4 border border-terminal-green text-terminal-green font-bold hover:bg-terminal-green hover:text-black transition-all">
+                        ./send_message.sh
+                    </button>
+                    <p id="form-status" class="hidden mt-2 text-xs text-terminal-green"></p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-5 border-t border-terminal-border text-center">
+        <div class="container mx-auto px-6">
+            <p class="font-mono text-[10px] text-gray-600 leading-relaxed">
+                &copy; 2026 Minhajul Abadin Pius | Built with <span class="text-terminal-green">&hearts;</span> and <span class="text-terminal-cyan">Tailwind</span>
+            </p>
+            <button id="top-btn" class="mt-3 text-sm text-gray-500 hover:text-terminal-green transition-all">
+                <i class="fa-solid fa-chevron-up"></i>
+            </button>
+        </div>
+    </footer>
+
+    <div id="certificate-modal" class="certificate-modal hidden" aria-hidden="true">
+        <div class="certificate-backdrop" data-close="certificate-modal"></div>
+        <div class="certificate-panel">
+            <div class="certificate-header">
+                <div class="font-mono text-terminal-green text-sm uppercase tracking-widest">Cisco Network Security Certificate</div>
+                <button id="certificate-close" class="certificate-close" type="button" aria-label="Close certificate viewer">✕</button>
+            </div>
+            <iframe src="assets/cns.pdf" title="Cisco Network Security Certificate" class="certificate-frame"></iframe>
+        </div>
+    </div>
+
+    <div id="resume-modal" class="certificate-modal hidden" aria-hidden="true">
+        <div class="certificate-backdrop" data-close="resume-modal"></div>
+        <div class="certificate-panel">
+            <div class="certificate-header">
+                <div class="font-mono text-terminal-green text-sm uppercase tracking-widest">Resume</div>
+                <button id="resume-close" class="certificate-close" type="button" aria-label="Close resume viewer">✕</button>
+            </div>
+            <iframe src="assets/resume.pdf" title="Resume" class="certificate-frame"></iframe>
+        </div>
+    </div>
+
+    <div id="boot-loader" class="boot-loader">
+        <div class="boot-panel">
+            <div class="boot-label">system boot</div>
+            <div class="boot-bar"><span id="boot-progress"></span></div>
+            <div id="boot-log" class="boot-log"></div>
+        </div>
+    </div>
+
+    <canvas id="matrix-bg"></canvas>
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

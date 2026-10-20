@@ -69,12 +69,23 @@ body::before {
     display: inline-flex;
     align-items: center;
     white-space: nowrap;
+    font-size: 0.9em;
     min-height: clamp(6.5rem, 8vw, 11rem);
     line-height: 0.9;
     letter-spacing: -0.06em;
     overflow: hidden;
     width: fit-content;
     max-width: 100%;
+}
+
+#typewriter::after {
+    content: "";
+    display: inline-block;
+    width: 3.5px;
+    height: 1.2em;
+    margin-left: 0.12em;
+    background: var(--green);
+    animation: blink 1s steps(1, end) infinite;
 }
 
 .typewriter-static,
@@ -227,6 +238,56 @@ body::before {
     height: calc(100% - 68px);
     border: 0;
     background: white;
+}
+
+.ccna-certificate-header {
+    gap: 1rem;
+}
+
+.certificate-select {
+    max-width: min(70vw, 420px);
+    margin-top: 0.5rem;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    border-radius: 4px;
+    background: #0a0a0a;
+    color: #d1d5db;
+    font: 0.75rem "Fira Code", monospace;
+}
+
+.certificate-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    height: 44px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.certificate-nav {
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    border-radius: 4px;
+    background: transparent;
+    color: #d1fae5;
+    cursor: pointer;
+}
+
+.certificate-nav:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.certificate-panel:has(.certificate-toolbar) {
+    display: flex;
+    flex-direction: column;
+}
+
+.certificate-panel:has(.certificate-toolbar) .certificate-frame {
+    flex: 1;
+    min-height: 0;
+    height: auto;
 }
 
 .boot-loader {
@@ -440,6 +501,26 @@ body::before {
     border: 1px solid rgba(16, 185, 129, 0.4);
     background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(34, 211, 238, 0.05));
     box-shadow: 0 0 20px rgba(16, 185, 129, 0.12);
+}
+
+button.platform-cert {
+    width: 100%;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+button.platform-cert:hover,
+button.platform-cert:focus-visible {
+    border-color: var(--green);
+    box-shadow: 0 0 24px rgba(16, 185, 129, 0.24);
+    transform: translateY(-2px);
+}
+
+button.platform-cert:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
 }
 
 .skill-card {

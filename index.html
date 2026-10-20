@@ -70,7 +70,7 @@
             </ul>
 
             <!-- Mobile Menu Btn -->
-            <button id="menu-btn" class="md:hidden text-terminal-green text-2xl">
+            <button id="menu-btn" class="md:hidden text-terminal-green text-2xl" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
                 <i class="fa-solid fa-terminal"></i>
             </button>
         </div>
@@ -182,13 +182,14 @@
                 <div class="platform-badge">
                     <img src="https://img.shields.io/badge/HackTheBox-Active-10b981?style=for-the-badge&logo=hackthebox&logoColor=white" alt="HackTheBox profile" />
                 </div>
-                <div class="platform-badge platform-cert badge-ccna reveal">
+                <button type="button" class="platform-badge platform-cert badge-ccna reveal ccna-certificate-trigger" aria-label="Open CCNA certificates">
                     <div class="text-center">
                         <div class="text-terminal-green font-mono text-xs uppercase tracking-widest mb-2">Certification</div>
                         <div class="text-white font-mono text-lg font-bold">CCNA</div>
                         <div class="text-terminal-cyan text-xs mt-2">Cisco Certified Network Associate</div>
+                        <div class="text-gray-400 font-mono text-xs mt-3">View certificates</div>
                     </div>
-                </div>
+                </button>
                 <button type="button" class="platform-badge platform-cert badge-cns reveal certificate-trigger" aria-label="Open Cisco Network Security certificate">
                     <div class="text-center">
                         <div class="text-terminal-green font-mono text-xs uppercase tracking-widest mb-2">Certification</div>
@@ -433,20 +434,40 @@
 
     <div id="certificate-modal" class="certificate-modal hidden" aria-hidden="true">
         <div class="certificate-backdrop" data-close="certificate-modal"></div>
-        <div class="certificate-panel">
+        <div class="certificate-panel" role="dialog" aria-modal="true" aria-labelledby="certificate-title">
             <div class="certificate-header">
-                <div class="font-mono text-terminal-green text-sm uppercase tracking-widest">Cisco Network Security Certificate</div>
+            <div id="certificate-title" class="font-mono text-terminal-green text-sm uppercase tracking-widest">Cisco Network Security Certificate</div>
                 <button id="certificate-close" class="certificate-close" type="button" aria-label="Close certificate viewer">✕</button>
             </div>
             <iframe src="assets/cns.pdf" title="Cisco Network Security Certificate" class="certificate-frame"></iframe>
         </div>
     </div>
 
+    <div id="ccna-certificate-modal" class="certificate-modal hidden" aria-hidden="true">
+        <div class="certificate-backdrop" data-close="ccna-certificate-modal"></div>
+        <div class="certificate-panel" role="dialog" aria-modal="true" aria-labelledby="ccna-certificate-title">
+            <div class="certificate-header ccna-certificate-header">
+                <div>
+                    <div id="ccna-certificate-title" class="font-mono text-terminal-green text-sm uppercase tracking-widest">CCNA Certificates</div>
+                    <label class="sr-only" for="ccna-certificate-select">Select a CCNA certificate</label>
+                    <select id="ccna-certificate-select" class="certificate-select"></select>
+                </div>
+                <button id="ccna-certificate-close" class="certificate-close" type="button" aria-label="Close CCNA certificate viewer">✕</button>
+            </div>
+            <div class="certificate-toolbar">
+                <button id="ccna-certificate-previous" class="certificate-nav" type="button" aria-label="Previous certificate"><i class="fa-solid fa-chevron-left"></i></button>
+                <span id="ccna-certificate-count" class="font-mono text-xs text-gray-300" aria-live="polite"></span>
+                <button id="ccna-certificate-next" class="certificate-nav" type="button" aria-label="Next certificate"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+            <iframe id="ccna-certificate-frame" title="CCNA certificate" class="certificate-frame"></iframe>
+        </div>
+    </div>
+
     <div id="resume-modal" class="certificate-modal hidden" aria-hidden="true">
         <div class="certificate-backdrop" data-close="resume-modal"></div>
-        <div class="certificate-panel">
+        <div class="certificate-panel" role="dialog" aria-modal="true" aria-labelledby="resume-title">
             <div class="certificate-header">
-                <div class="font-mono text-terminal-green text-sm uppercase tracking-widest">Resume</div>
+            <div id="resume-title" class="font-mono text-terminal-green text-sm uppercase tracking-widest">Resume</div>
                 <button id="resume-close" class="certificate-close" type="button" aria-label="Close resume viewer">✕</button>
             </div>
             <iframe src="assets/resume.pdf" title="Resume" class="certificate-frame"></iframe>

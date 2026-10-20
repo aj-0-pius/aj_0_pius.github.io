@@ -15,12 +15,12 @@ function renderNameTyping(visibleChars) {
     const visibleName = nameLine.slice(0, visibleChars);
 
     if (visibleChars <= greenStartIndex) {
-        typewriterElement.innerHTML = `<span class="typewriter-line"><span class="typewriter-name whitespace-nowrap">${visibleName}</span></span>`;
+        typewriterElement.innerHTML = `<span class="typewriter-line"><span class="typewriter-name whitespace-nowrap">${visibleName}<span class="typewriter-cursor" aria-hidden="true"></span></span></span>`;
         return;
     }
 
     const greenPart = visibleName.slice(greenStartIndex);
-    typewriterElement.innerHTML = `<span class="typewriter-line"><span class="typewriter-name whitespace-nowrap">${beforeGreen}<span style="color:#10b981">${greenPart}</span></span></span>`;
+    typewriterElement.innerHTML = `<span class="typewriter-line"><span class="typewriter-name whitespace-nowrap">${beforeGreen}<span style="color:#10b981">${greenPart}</span><span class="typewriter-cursor" aria-hidden="true"></span></span></span>`;
 }
 
 function startNameLoop() {
@@ -38,7 +38,7 @@ function startNameLoop() {
         }
 
         setTimeout(() => {
-            typewriterElement.innerHTML = `<span class="typewriter-line"><span class="typewriter-name">${nameLine.slice(0, greenStartIndex)}<span style="color:#10b981">${greenWord}</span></span></span>`;
+            typewriterElement.innerHTML = `<span class="typewriter-line"><span class="typewriter-name">${nameLine.slice(0, greenStartIndex)}<span style="color:#10b981">${greenWord}</span><span class="typewriter-cursor" aria-hidden="true"></span></span></span>`;
             setTimeout(() => {
                 loopCharIndex = 0;
                 loopName();
@@ -68,25 +68,102 @@ if (pgpBtn && pgpKey) {
 const certificateTrigger = document.querySelector('.certificate-trigger');
 const certificateModal = document.getElementById('certificate-modal');
 const certificateClose = document.getElementById('certificate-close');
+const ccnaCertificateTrigger = document.querySelector('.ccna-certificate-trigger');
+const ccnaCertificateModal = document.getElementById('ccna-certificate-modal');
+const ccnaCertificateClose = document.getElementById('ccna-certificate-close');
+const ccnaCertificateSelect = document.getElementById('ccna-certificate-select');
+const ccnaCertificateFrame = document.getElementById('ccna-certificate-frame');
+const ccnaCertificateCount = document.getElementById('ccna-certificate-count');
+const ccnaCertificatePrevious = document.getElementById('ccna-certificate-previous');
+const ccnaCertificateNext = document.getElementById('ccna-certificate-next');
 const resumeTrigger = document.querySelector('.resume-trigger');
 const resumeModal = document.getElementById('resume-modal');
 const resumeClose = document.getElementById('resume-close');
 
-if (certificateTrigger && certificateModal && certificateClose) {
-    certificateTrigger.addEventListener('click', () => {
-        certificateModal.classList.remove('hidden');
-        certificateModal.setAttribute('aria-hidden', 'false');
+let activeDocumentModal = null;
+let activeDocumentTrigger = null;
+
+function openDocumentModal(modal, trigger, closeButton) {
+    activeDocumentModal = modal;
+    activeDocumentTrigger = trigger;
+    modal.classList.remove('hidden');
+    modal.setAttribute('aria-hidden', 'false');
+    closeButton.focus();
+}
+
+function closeDocumentModal(modal) {
+    modal.classList.add('hidden');
+    modal.setAttribute('aria-hidden', 'true');
+
+    if (activeDocumentModal === modal) {
+        activeDocumentModal = null;
+        activeDocumentTrigger?.focus();
+        activeDocumentTrigger = null;
+    }
+}
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && activeDocumentModal) {
+        closeDocumentModal(activeDocumentModal);
+    }
+});
+
+const ccnaCertificates = [
+    { title: 'Introduction to Networks', file: 'assets/CCNA-_Introduction_to_Networks_certificate.pdf' }
+];
+
+if (ccnaCertificateTrigger && ccnaCertificateModal && ccnaCertificateClose && ccnaCertificateSelect && ccnaCertificateFrame && ccnaCertificateCount && ccnaCertificatePrevious && ccnaCertificateNext) {
+    let activeCcnaCertificate = 0;
+
+    ccnaCertificates.forEach((certificate, index) => {
+        const option = document.createElement('option');
+        option.value = String(index);
+        option.textContent = certificate.title;
+        ccnaCertificateSelect.append(option);
     });
 
-    certificateClose.addEventListener('click', () => {
-        certificateModal.classList.add('hidden');
-        certificateModal.setAttribute('aria-hidden', 'true');
+    const showCcnaCertificate = (index) => {
+        activeCcnaCertificate = (index + ccnaCertificates.length) % ccnaCertificates.length;
+        const certificate = ccnaCertificates[activeCcnaCertificate];
+        ccnaCertificateSelect.value = String(activeCcnaCertificate);
+        ccnaCertificateFrame.src = certificate.file;
+        ccnaCertificateFrame.title = certificate.title;
+        ccnaCertificateCount.textContent = `${activeCcnaCertificate + 1} / ${ccnaCertificates.length}`;
+        ccnaCertificatePrevious.disabled = ccnaCertificates.length < 2;
+        ccnaCertificateNext.disabled = ccnaCertificates.length < 2;
+    };
+
+    showCcnaCertificate(0);
+
+    ccnaCertificateTrigger.addEventListener('click', () => {
+        openDocumentModal(ccnaCertificateModal, ccnaCertificateTrigger, ccnaCertificateClose);
     });
+
+    ccnaCertificateSelect.addEventListener('change', () => {
+        showCcnaCertificate(Number(ccnaCertificateSelect.value));
+    });
+
+    ccnaCertificatePrevious.addEventListener('click', () => showCcnaCertificate(activeCcnaCertificate - 1));
+    ccnaCertificateNext.addEventListener('click', () => showCcnaCertificate(activeCcnaCertificate + 1));
+
+    ccnaCertificateClose.addEventListener('click', () => closeDocumentModal(ccnaCertificateModal));
+    ccnaCertificateModal.addEventListener('click', (event) => {
+        if (event.target instanceof HTMLElement && event.target.dataset.close === 'ccna-certificate-modal') {
+            closeDocumentModal(ccnaCertificateModal);
+        }
+    });
+}
+
+if (certificateTrigger && certificateModal && certificateClose) {
+    certificateTrigger.addEventListener('click', () => {
+        openDocumentModal(certificateModal, certificateTrigger, certificateClose);
+    });
+
+    certificateClose.addEventListener('click', () => closeDocumentModal(certificateModal));
 
     certificateModal.addEventListener('click', (event) => {
         if (event.target instanceof HTMLElement && event.target.dataset.close === 'certificate-modal') {
-            certificateModal.classList.add('hidden');
-            certificateModal.setAttribute('aria-hidden', 'true');
+            closeDocumentModal(certificateModal);
         }
     });
 }
@@ -94,19 +171,14 @@ if (certificateTrigger && certificateModal && certificateClose) {
 if (resumeTrigger && resumeModal && resumeClose) {
     resumeTrigger.addEventListener('click', (event) => {
         event.preventDefault();
-        resumeModal.classList.remove('hidden');
-        resumeModal.setAttribute('aria-hidden', 'false');
+        openDocumentModal(resumeModal, resumeTrigger, resumeClose);
     });
 
-    resumeClose.addEventListener('click', () => {
-        resumeModal.classList.add('hidden');
-        resumeModal.setAttribute('aria-hidden', 'true');
-    });
+    resumeClose.addEventListener('click', () => closeDocumentModal(resumeModal));
 
     resumeModal.addEventListener('click', (event) => {
         if (event.target instanceof HTMLElement && event.target.dataset.close === 'resume-modal') {
-            resumeModal.classList.add('hidden');
-            resumeModal.setAttribute('aria-hidden', 'true');
+            closeDocumentModal(resumeModal);
         }
     });
 }
@@ -114,12 +186,24 @@ if (resumeTrigger && resumeModal && resumeClose) {
 const menuBtn = document.getElementById('menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
 if (menuBtn && mobileMenu) {
+    const setMobileMenuOpen = (isOpen) => {
+        mobileMenu.classList.toggle('hidden', !isOpen);
+        menuBtn.setAttribute('aria-expanded', String(isOpen));
+    };
+
     menuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
+        setMobileMenuOpen(menuBtn.getAttribute('aria-expanded') !== 'true');
     });
 
     mobileMenu.querySelectorAll('a').forEach((link) => {
-        link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        link.addEventListener('click', () => setMobileMenuOpen(false));
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') {
+            setMobileMenuOpen(false);
+            menuBtn.focus();
+        }
     });
 }
 
